@@ -13,9 +13,9 @@ import android.widget.ListView;
 
 public class ChannelsList extends ListActivity
 {
-    Channel[] channels = new Channel[7];
-    String[] channelNames = new String[]{"A&E","Adult Swim", "AMC","BBC America", "Comedy Central", "Discovery Channel", "National Geographic"};
-
+    private Channel[] channels = new Channel[7];
+    private String[] channelNames = new String[]{"A&E","Adult Swim", "AMC","BBC America", "Comedy Central", "Discovery Channel", "National Geographic"};
+    int selectedChannel;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -37,12 +37,11 @@ public class ChannelsList extends ListActivity
     {
         super.onListItemClick(l, v, position, id);
 
-        //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse();
         Intent intent = null;
 
-        //shows.setChannel(position);
-        intent = new Intent(this, ShowList.class);
-
+        selectedChannel = position;
+        intent = new Intent(this, ShowsList.class);
+        intent.putExtra("chanNum", selectedChannel);
         if (intent != null)
         {
             startActivity(intent);
