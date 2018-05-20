@@ -13,8 +13,8 @@ import android.widget.ListView;
 
 public class ChannelsList extends ListActivity
 {
-    private Channel[] channels = new Channel[7];
-    private String[] channelNames = new String[]{"A&E","Adult Swim", "AMC","BBC America", "Comedy Central", "Discovery Channel", "National Geographic"};
+    private Channel[] channels = new Channel[channelNames.length];
+    static private String[] channelNames = new String[]{"A&E","Adult Swim", "AMC","BBC America", "Comedy Central", "Discovery Channel", "National Geographic"};
     int selectedChannel;
 
     @Override
@@ -42,10 +42,10 @@ public class ChannelsList extends ListActivity
         selectedChannel = position;
         intent = new Intent(this, ShowsList.class);
         intent.putExtra("chanNum", selectedChannel);
+
         if (intent != null)
         {
             startActivity(intent);
         }
-
     }
 }
