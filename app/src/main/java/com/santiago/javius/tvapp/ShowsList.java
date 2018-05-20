@@ -14,12 +14,11 @@ import android.widget.ListView;
 
 public class ShowsList extends ListActivity
 {
-    private int myChanNum;
-    private String[] myShowNames = new String[3];
-    private String[] myURLLinks = new String[3];
     private Url urls = new Url();
+    private int myChanNum;
+    private Show[] myShows = new Show[3];
+    private String[] myShowNames = new String[3];
 
-    Show selectedShow = new Show();
 
     final String[][] tvShows = new String[][]{{"The First 48","Duck Dynasty","Storage Wars"},
             {"Robot Chicken", "Family Guy", "American Dad"},
@@ -39,24 +38,27 @@ public class ShowsList extends ListActivity
         {
             myChanNum = extras.getInt("chanNum");
         }
+
+        setMyShows();
         setMyShowNames();
+
         setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myShowNames));
+    }
+
+    public void setMyShows()
+    {
+        for (int i = 0; i<3; i++)
+        {
+            myShows[i] = new Show(tvShows[myChanNum][i], myChanNum, i);
+        }
     }
 
     public void setMyShowNames()
     {
+        //sets shownames
         for (int i = 0; i<3; i++)
         {
-            myShowNames[i] = tvShows[myChanNum][i];
-        }
-        //setMyShowURLs();
-    }
-
-    public void setMyShowURLs()
-    {
-        for (int i = 0; i<3; i++)
-        {
-            myURLLinks[i] = urls.getAddress(myChanNum, i);
+            myShowNames[i] = myShows[i].getName();
         }
     }
 
@@ -66,12 +68,7 @@ public class ShowsList extends ListActivity
 
         Intent intent = null;
 
-        /*selectedChannel = position;
-        intent = new Intent(this, ShowsList.class);
-        intent.putExtra("chanNum", selectedChannel);*/
-
-        //intent = new Intent(Intent.ACTION_VIEW, Uri.parse(myURLLinks[position]));
-
+        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(myShows[position].getURL().getAddress()));
 
         if (intent != null)
         {

@@ -6,26 +6,32 @@ package com.santiago.javius.tvapp;
 
 public class Show
 {
-    private Url myURL;
-    private String myName;
+    private Url myURL = new Url();
+    private String  myName;
 
-    public Show()
-    {
+    private int myChanNum;
+    private int myShowNum;
 
-    }
-    public Show(String name)
-    {
-        myName = name;
-    }
-
-
-    public void setName(String name)
+    public Show(String name, int chan, int show)
     {
         myName = name;
+        myChanNum = chan;
+        myShowNum = show;
+        setMyURL();
     }
-    public void setURL(String url)
+
+    public void setMyURL()
     {
-        myURL.setLink(url);
+        myURL.generateAddress(myChanNum, myShowNum);
+    }
+
+    public String getName()
+    {
+        return myName;
+    }
+    public Url getURL()
+    {
+        return myURL;
     }
 
 }
