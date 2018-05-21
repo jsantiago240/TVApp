@@ -13,35 +13,24 @@ import android.widget.ListView;
 
 public class ChannelsList extends ListActivity
 {
-    private Channel[] channels = new Channel[channelNames.length];
-    static private String[] channelNames = new String[]{"A&E","Adult Swim", "AMC","BBC America", "Comedy Central", "Discovery Channel", "National Geographic"};
-    int selectedChannel;
+    final private String[] CHANNEL_NAMES = new String[]{"A&E","Adult Swim", "AMC","BBC America", "Comedy Central", "Discovery Channel", "National Geographic"};
+    private int selectedChannel;    //the channel selected by the user
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setDefaultChannels();
-        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, channelNames));
-    }
-
-    public void setDefaultChannels()
-    {
-        for (int i = 0; i<channels.length;i++)
-        {
-            channels[i] = new Channel(channelNames[i]);
-        }
+        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, CHANNEL_NAMES)); //shows every channel's name
     }
 
     protected void onListItemClick(ListView l, View v, int position, long id)
     {
         super.onListItemClick(l, v, position, id);
 
-        Intent intent = null;
-
+        //Stores the selected channel's position in the selectedChannel int, which is then passed to the next activity
         selectedChannel = position;
-        intent = new Intent(this, ShowsList.class);
-        intent.putExtra("chanNum", selectedChannel);
+        Intent intent = new Intent(this, ShowsList.class);
+        intent.putExtra("chanNum", selectedChannel);                //Stores selectedChannel as an extra, under "chanNum", to pass the data
 
         if (intent != null)
         {

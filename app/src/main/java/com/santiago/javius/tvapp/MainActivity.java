@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Starts ChannelsList ListActivity
         Intent intent = new Intent(this, ChannelsList.class);
         if (intent != null)
         {
